@@ -1,0 +1,19 @@
+## Seqs
+
+# Setup
+
+Ruby should be installed. This was written using 3.0.1 but any recent version should work.
+
+# Running tests
+
+```
+rake test
+```
+
+# Running the script
+
+This script includes a sample dictionary which you can use. An out of the box example would be:
+
+```
+./seqs --input-file resources/dictionary.txt --words-file words.txt --seqs-file seqs.txt
+```
