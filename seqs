@@ -1,0 +1,58 @@
+#!/usr/bin/env ruby
+
+require 'optparse'
+require_relative './lib/file_writer'
+
+options = {}
+
+OptionParser.new do |opts|
+  opts.banner = 'Usage: seqs [options]'
+
+  opts.on('--input-file FILENAME', 'Input dictionary') do |filename|
+    options[:input_file] = filename
+  end
+
+  opts.on('--words-file FILENAME', 'Output words file') do |filename|
+    options[:words_file] = filename
+  end
+
+  opts.on('--seqs-file FILENAME', 'Output sequences file') do |filename|
+    options[:seqs_file] = filename
+  end
+
+  opts.on('-h', '--help', 'Prints this help') do
+    puts opts
+    exit
+  end
+end.parse!
+
+input_fname = options.fetch(:input_file) do
+  puts '--input-file FILENAME is required'
+  exit
+end
+
+words_fname = options.fetch(:words_file) do
+  puts '--words-file FILENAME is required'
+  exit
+end
+
+seqs_fname = options.fetch(:seqs_file) do
+  puts '--seqs-file FILENAME is required'
+  exit
+end
+
+begin
+  input_file = File.open(input_fname)
+  words_file = File.open(words_fname, 'w+')
+  seqs_file  = File.open(seqs_fname, 'w+')
+
+  FileWriter.run(
+    input_file: input_file,
+    words_file: words_file,
+    seqs_file: seqs_file
+  )
+ensure
+  input_file&.close
+  words_file&.close
+  seqs_file&.close
+end

@@ -6,9 +6,5 @@ class FileWriter
       words_file.puts word
       seqs_file.puts seq
     end
-  ensure
-    dict_file.close
-    words_file.close
-    seqs_file.close
   end
 end
