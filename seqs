@@ -3,6 +3,8 @@
 require 'optparse'
 require_relative './lib/file_writer'
 
+ARGV << '-h' if ARGV.empty?
+
 options = {}
 
 OptionParser.new do |opts|
